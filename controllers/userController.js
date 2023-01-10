@@ -199,6 +199,7 @@ exports.updateUser = catchAsyncErrors(async (req, res, next) => {
     user1[0].Role = req.query.user.Role;
 
     user1[0].save();
+
     log.info(`${req.query.Admin} has changed details of ${user1[0].FlatNo} : ${message}`);
     user1 = await User.find({ FlatNo: req.query.user.FlatNo });
     res.status(200).json({
