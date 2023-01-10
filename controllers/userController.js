@@ -48,7 +48,10 @@ exports.createUser = catchAsyncErrors(async (req, res, next) => {
             ParkingSlot: ParkingSlot,
             Role: Role
         });
-        sendToken(user, 201, res)
+        res.status(201).json({
+            success: true,
+            
+        });
     }
 });
 
@@ -83,10 +86,8 @@ exports.loginUser = catchAsyncErrors(async (req, res, next) => {
         Role: role, 
     }
     // sendToken(user, 201, res);
-    res.status(200).json({
-        success: true,
-        user
-    });
+    sendToken(user, 201, res)
+    
 })
 
 
