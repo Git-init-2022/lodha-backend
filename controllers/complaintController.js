@@ -65,13 +65,25 @@ exports.updateComplaint = catchAsyncErrors(async (req, res, next) => {
         if (!getUser) {
             return;
         }
-        log.info(`${req.query.Admin} has changed status of ${complaint1} to done`);
-        sendEmail({
-            email: getUser[0].Email,
-            subject: "Complaint Accepted",
-            message: "<h3 style='color: green;'>Your Complaint is Done!</h3>"
-        })
+        if(complaint1.Status == 2){
+            log.info(`${req.query.Admin} has changed status of ${complaint1} to Closed`);
+            sendEmail({
+                email: getUser[0].Email,
+                subject: "Complaint Closed",
+                message: "<div><h3 style='color: red;'>Your Complaint is Closed!</h3><h3>Please visit portal to know More.</h3></div>"
+            })
+        }
+        else{
+            log.info(`${req.query.Admin} has changed status of ${complaint1} to Resolved`);
+            sendEmail({
+                email: getUser[0].Email,
+                subject: "Complaint Accepted",
+                message: "<h3 style='color: green;'>Your Complaint is Resolved!</h3>"
+            })
+        }
+       
     }
+    complaint1.Comments = req.query.complaint.Comments; 
     complaint1.Status = req.query.complaint.Status;
     complaint1.Description = req.query.complaint.Description;
     complaint1.save();

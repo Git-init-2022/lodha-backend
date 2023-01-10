@@ -26,6 +26,7 @@ const complaintSchema = mongoose.Schema({
         type: String,
         required: [true,"Please Enter Flat Number"]
     },
+    Comments: String,
     FileHashes: String,
     FileObjects: [String] 
 })
