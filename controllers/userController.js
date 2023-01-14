@@ -85,9 +85,11 @@ exports.loginUser = catchAsyncErrors(async (req, res, next) => {
         Dues: user1[0].Dues,
         Role: role, 
     }
-    // sendToken(user, 201, res);
-    sendToken(user, 201, res)
-    
+   
+    res.status(200).json({
+        success: true,
+        user
+    })
 })
 
 
