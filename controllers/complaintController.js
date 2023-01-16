@@ -57,6 +57,8 @@ exports.getAllComplaints = catchAsyncErrors(async (req, res) => {
 exports.updateComplaint = catchAsyncErrors(async (req, res, next) => {
 
     let complaint1 = await Complaint.findById(req.query.complaint._id);
+    let subject = "";
+    let message = "";
     if (!complaint1) {
         return next(new ErrorHandler("complaint not found", 404));
     }
@@ -72,7 +74,9 @@ exports.updateComplaint = catchAsyncErrors(async (req, res, next) => {
                 subject: "Complaint Closed",
                 message: "<div><h3 style='color: red;'>Your Complaint is Closed!</h3><h3>Please visit portal to know More.</h3></div>"
             })
-        }
+            subject = "Complaint Closed"; 
+            message = "Complaint is closed!. Please check the Complaints section to know More."
+         }
         else{
             log.info(`${req.query.Admin} has changed status of ${complaint1} to Resolved`);
             sendEmail({
@@ -80,6 +84,9 @@ exports.updateComplaint = catchAsyncErrors(async (req, res, next) => {
                 subject: "Complaint Accepted",
                 message: "<h3 style='color: green;'>Your Complaint is Resolved!</h3>"
             })
+
+            subject = "Complaint Accepted"; 
+            message = "Complaint is Accepted!. Please check the Complaints section to know More."
         }
        
     }
@@ -90,7 +97,8 @@ exports.updateComplaint = catchAsyncErrors(async (req, res, next) => {
     complaint1 = await Complaint.find({ FlatNo: req.query.complaint.FlatNo, Issue: req.query.complaint.Issue, Description: req.query.complaint.Description });
     res.status(200).json({
         success: true,
-        message: "SuccessFully updated"
+        message: message, 
+        subject: subject
     })
 });
 
