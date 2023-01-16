@@ -11,7 +11,9 @@ const NotifySchema = mongoose.Schema({
     },
     PostedDate: { 
         type: Date
-    }
+    }, 
+    FileHashes: String, 
+    FileObjects: [String]
 })
 
 module.exports = mongoose.model("Notification", NotifySchema);

@@ -16,6 +16,7 @@ exports.createNotification = catchAsyncErrors(async (req, res, next) => {
         })
     }
     else {
+        
         const notification = await Notification.create(req.body);
         res.status(201).json({
             success: true,

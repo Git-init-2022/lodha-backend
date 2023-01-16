@@ -32,7 +32,7 @@ exports.createUser = catchAsyncErrors(async (req, res, next) => {
     if (user1 && Object.keys(user1).length) {
         res.status(201).json({
             success: false,
-            message: "User Already Exists"
+            message: "User Already Exists",
         })
     }
     else {
@@ -60,8 +60,14 @@ exports.loginUser = catchAsyncErrors(async (req, res, next) => {
     const { FlatNo, Password } = req.body;
     
     const user1 = await User.find({ FlatNo: FlatNo, Password: Password })
-    if (!user1 && Object.keys(user1).length) {
-        return next(new ErrorHandler("User does not exists", 404));
+    console.log(user1);
+    if (user1.length == 0) {
+        res.status(200).json({
+            success: false,
+            message: "User Doesnt Exists",
+            
+        })
+        return ;
     }
 
     const role = crypto
