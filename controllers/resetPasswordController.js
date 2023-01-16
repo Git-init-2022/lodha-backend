@@ -46,14 +46,18 @@ exports.updatePassword = catchAsyncErrors(async (req, res, next) => {
     })
     console.log("user1: ", user1);
     if (!user1 || user1.length==0) {
-        return next(new ErrorHandler("update password is invalid", 201));
+        res.status(200).json({
+            success: false,
+            message: "password updation failed"
+        })
+        return
     }
     
     user1.Password = req.query.Password;
     user1.resetPasswordToken = undefined;
     user1.resetPasswordExpire = undefined; 
     user1.save();
-    res.status(201).json({
+    res.status(200).json({
         success: true,
         message: "password updation successful"
     })
