@@ -16,7 +16,7 @@ exports.forgotPassword = catchAsyncErrors(async (req, res, next) => {
     const resetToken = user1[0].getResetPasswordToken();
     user1[0].save();
     console.log("in Schema : ", user1[0].resetPasswordToken);
-    const resetPasswordUrl = `${req.protocol}://localhost:5173/updatepassword/${resetToken}`;
+    const resetPasswordUrl = `${req.protocol}://lodha-frontend.vercel.app/updatepassword/${resetToken}`;
     const message = `Your password reset Link is :- \n\n ${resetPasswordUrl} \n\n Please Note that the link gets deactivated within 15 minutes \n\nIf you have not requested this email then, please ignore it.`;
     console.log(message);
     await sendEmail({
