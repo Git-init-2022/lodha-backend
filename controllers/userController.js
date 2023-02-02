@@ -37,6 +37,10 @@ exports.createUser = catchAsyncErrors(async (req, res, next) => {
     }
     else {
         const { Password, OwnerName, RegisteredName, Block, Mobile, ParkingSlot, Email, Role } = req.body;
+        Password = crypto
+        .createHash("sha256")
+        .update(Password)
+        .digest("hex");
         const user = await User.create({
             FlatNo: FlatNo,
             Email: Email,
@@ -58,7 +62,10 @@ exports.createUser = catchAsyncErrors(async (req, res, next) => {
 // login User
 exports.loginUser = catchAsyncErrors(async (req, res, next) => {
     const { FlatNo, Password } = req.body;
-    
+    Password = crypto
+        .createHash("sha256")
+        .update(Password)
+        .digest("hex");
     const user1 = await User.find({ FlatNo: FlatNo, Password: Password })
     console.log(user1);
     if (user1.length == 0) {
@@ -74,11 +81,6 @@ exports.loginUser = catchAsyncErrors(async (req, res, next) => {
       .createHash("sha256")
       .update(user1[0].Role)
       .digest("hex");
-    console.log("admin: ", crypto.createHash("sha256").update("admin").digest("hex"));
-    console.log("user: ", crypto.createHash("sha256").update("user").digest("hex"));
-    console.log("fm: ", crypto.createHash("sha256").update("fm").digest("hex"));
-    console.log("am: ", crypto.createHash("sha256").update("am").digest("hex"));
-    console.log("itsupport: ", crypto.createHash("sha256").update("itsupport").digest("hex"));
     
     const user = {
         FlatNo: user1[0].FlatNo,
