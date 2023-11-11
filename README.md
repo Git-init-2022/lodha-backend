@@ -42,18 +42,6 @@
 ---
 
 
-## 📍 Overview
-
-HTTPStatus Exception: 429
-
----
-
-## 📦 Features
-
-HTTPStatus Exception: 429
-
----
-
 
 ## 📂 Repository Structure
 
