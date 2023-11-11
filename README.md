@@ -5,7 +5,7 @@
 ![lodhameridian](https://github.com/Git-init-2022/lodha-backend/assets/107217455/d477d154-f970-40fe-9d40-c75ee9801ea2)
 
 <br>LODHA-BACKEND</h1>
-<h3>◦ HTTPStatus Exception: 429</h3>
+
 <h3>◦ Developed with the software and tools below.</h3>
 
 <p align="center">
